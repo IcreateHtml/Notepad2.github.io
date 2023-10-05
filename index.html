@@ -54,6 +54,22 @@ label {
       <textarea id="text" name="text" rows="10" cols="60"></textarea>
       <br>
       <br>
+      <!-- Add a dropdown menu to select file format -->
+      <style> select {
+        padding: 10px 20px;
+        margin-right: 10px;
+        background-color: grey;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      </style>
+      <select id="format" name="format">
+        <option value=".html">HTML</option>
+        <option value=".txt">Text</option>
+      </select>
+      <!-- End of dropdown menu -->
       <button type="button" onclick="saveText()">Save Text</button>
       <input type="file" id="fileInput" style="display:none">
       <button type="button" onclick="uploadFile()">Upload File</button>
@@ -65,7 +81,10 @@ label {
             type: "text/plain"
           }),
           n = document.createElement("a");
-        n.download = "SavedFileInNotepad.txt", n.innerHTML = "Download File", null != window.webkitURL ? n.href = window.webkitURL.createObjectURL(t) : (n.href = window.URL.createObjectURL(t), n.onclick = destroyClickedElement, n.style.display = "none", document.body.appendChild(n)), n.click()
+        // Get the selected file format from the dropdown menu
+        var f = document.getElementById("format").value; 
+        n.download = "SavedFileInNotepad" + f; // Add the file format to the file name
+        n.innerHTML = "Download File", null != window.webkitURL ? n.href = window.webkitURL.createObjectURL(t) : (n.href = window.URL.createObjectURL(t), n.onclick = destroyClickedElement, n.style.display = "none", document.body.appendChild(n)), n.click()
       }
 
       function uploadFile() {
@@ -80,3 +99,4 @@ label {
   <noscript>Javascript Has Been Disabled Please Enable Javascript to continue.</noscript>
   </body>
 </html>
+
